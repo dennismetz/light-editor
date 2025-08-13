@@ -1,5 +1,5 @@
 {
-  "name": "@hannanmiah/light-editor",
+  "name": "@dennismetz/light-editor",
   "files": [
     "dist",
     "dist/style.css"

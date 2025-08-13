@@ -1,11 +1,11 @@
 # A Light Vue 3 rich text editor
 
-@hannanmiah/light-editor is built on top of tiptap (a popular rich text editor).
+@dennismetz/light-editor is built on top of tiptap (a popular rich text editor).
 
 ## Project Setup
 
 ```sh
-npm install @hannanmiah/light-editor
+npm install @dennismetz/light-editor
 ```
 
 ### Using as a plugin or Component
@@ -13,11 +13,11 @@ npm install @hannanmiah/light-editor
 ```
 //main.js
 import { createApp } from "vue";
-import { LightEditor, LightEditorPlugin } from "@hannanmiah/light-editor"
+import { LightEditor, LightEditorPlugin } from "@dennismetz/light-editor"
 
 import App from "./App.vue";
 //styles
-import "@hannanmiah/light-editor/dist/style.css"
+import "@dennismetz/light-editor/dist/style.css"
 
 const app = createApp(App);
 //use as a plugin
