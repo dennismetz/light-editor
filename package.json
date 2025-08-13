@@ -1,8 +1,7 @@
 {
   "name": "@dennismetz/light-editor",
   "files": [
-    "dist",
-    "dist/style.css"
+    "dist"
   ],
   "main": "./dist/light-editor.umd.js",
   "module": "./dist/light-editor.es.js",
@@ -11,9 +10,9 @@
       "import": "./dist/light-editor.es.js",
       "require": "./dist/light-editor.umd.js"
     },
-    "./dist/style.css": "./dist/style.css"
+    "./dist/light-editor.css": "./dist/light-editor.css"
   },
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "scripts": {
     "dev": "vite dev --port 3333",

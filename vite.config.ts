@@ -13,6 +13,7 @@ export default defineConfig({
     },
   },
   build: {
+    minify: false, // preserve symbol names so the ESM bundle ends with explicit named exports
     lib: {
       entry: path.resolve(__dirname, "src/plugins/index.ts"),
       name: "LightEditor",
