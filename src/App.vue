@@ -15,7 +15,6 @@
 	  <div class="about">
 		  <div class="grid grid-cols-2 gap-2 md:gap-4">
 			  <light-editor v-model="content" />
-			  <light-editor v-model="content" />
 		  </div>
 		  <div class="prose lg:prose-xl" v-html="content"></div>
 	  </div>
