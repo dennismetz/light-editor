@@ -9,8 +9,8 @@ defineProps<{
   <button
     type="button"
     @click="editor.chain().focus().toggleUnderline().run()"
-    :class="{ 'is-active': editor.isActive('underline') }"
-    class="editor-btn"
+    :class="{ active: editor.isActive('underline') }"
+    class="btn btn-sm btn-light"
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon">
       <path

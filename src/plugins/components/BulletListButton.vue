@@ -9,8 +9,8 @@ defineProps<{
   <button
     type="button"
     @click="editor.chain().focus().toggleBulletList().run()"
-    :class="{ 'is-active': editor.isActive('bulletList') }"
-    class="editor-btn"
+    :class="{ active: editor.isActive('bulletList') }"
+    class="btn btn-sm btn-light"
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon">
       <path

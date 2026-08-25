@@ -9,8 +9,8 @@ defineProps<{
   <button
     type="button"
     @click="editor.chain().focus().toggleOrderedList().run()"
-    :class="{ 'is-active': editor.isActive('orderedList') }"
-    class="editor-btn"
+    :class="{ active: editor.isActive('orderedList') }"
+    class="btn btn-sm btn-light"
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="icon">
       <path

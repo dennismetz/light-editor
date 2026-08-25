@@ -1,30 +1,17 @@
 <template>
-  <main class="p-10 flex flex-col space-y-4 md:space-y-8">
-	  <div class="about">
-		  <div class="grid grid-cols-2 gap-2 md:gap-4">
-			  <light-editor v-model="content" />
-		  </div>
-		   <div class="prose lg:prose-xl" v-html="content"></div>
-	  </div>
+  <main class="container py-4 d-flex flex-column gap-3 gap-md-4">
+    <div class="about d-flex flex-column gap-3">
+      <div class="row">
+        <div class="col-12 col-md-8">
+          <light-editor v-model="content" />
+        </div>
+      </div>
+      <div class="mt-3" v-html="content"></div>
+    </div>
   </main>
 </template>
 
 <style scoped>
-.about {
-	@apply flex flex-col space-y-4 md:space-y-4;
-}
-
-.is-active {
-	@apply bg-indigo-500 text-white;
-}
-
-.icon {
-	@apply w-4 h-4;
-}
-
-.editor-btn {
-	@apply bg-gray-200 p-2 rounded-md text-gray-700;
-}
 </style>
 
 <script setup lang="ts">

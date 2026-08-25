@@ -9,8 +9,8 @@ defineProps<{
   <button
     type="button"
     @click="editor.chain().focus().toggleItalic().run()"
-    :class="{ 'is-active': editor.isActive('italic') }"
-    class="editor-btn"
+    :class="{ active: editor.isActive('italic') }"
+    class="btn btn-sm btn-light"
   >
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icon">
       <path

@@ -50,8 +50,7 @@ const editor: ShallowRef<Editor | undefined> = useEditor({
   extensions: [StarterKit, Underline, TextStyle, Color, Link, Image],
   editorProps: {
     attributes: {
-      class:
-        "w-full prose prose-stone p-2 md:p-4 dark:prose-invert focus:outline-none",
+      class: "w-100 p-2 p-md-3",
     },
   },
 });
@@ -63,8 +62,8 @@ watch(content, (value) => {
 });
 </script>
 <template>
-  <div v-if="editor" class="editor-container">
-    <div class="editor-toolbox">
+  <div v-if="editor" class="editor-container border rounded overflow-hidden d-flex flex-column">
+    <div class="editor-toolbox d-flex flex-wrap align-items-center gap-1 gap-md-2 p-2 border-bottom bg-light">
       <component
         v-for="component in fileteredComponents"
         :key="component.name"

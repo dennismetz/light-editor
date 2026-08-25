@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { toRefs, watch } from "vue";
+import type { ShallowRef } from "vue";
+import type { Editor } from "@tiptap/core";
 import { useEditor, EditorContent } from "@tiptap/vue-3";
 import Underline from "@tiptap/extension-underline";
 import TextStyle from "@tiptap/extension-text-style";
@@ -16,16 +18,16 @@ const emit = defineEmits<{
 
 const { modelValue: content } = toRefs(props);
 
-const editor = useEditor({
+const editor: ShallowRef<Editor | undefined> = useEditor({
   content: content.value,
   onUpdate: () => {
     // HTML
-    emit("update:modelValue", editor.value.getHTML());
+    emit("update:modelValue", editor.value?.getHTML() ?? "");
   },
   extensions: [StarterKit, Underline, TextStyle, Strike],
   editorProps: {
     attributes: {
-      class: "prose sm:prose-xl md:prose-2xl p-2 md:p-4 focus:outline-none",
+      class: "w-100 p-2 p-md-3",
     },
   },
 });
@@ -43,14 +45,15 @@ export default {
 };
 </script>
 <template>
-  <div v-if="editor" class="flex flex-col border rounded-md">
+  <div v-if="editor" class="border rounded overflow-hidden d-flex flex-column">
     <div
-      class="flex flex-wrap items-center space-x-2 md:space-x-4 p-2 border-b"
+      class="d-flex flex-wrap align-items-center gap-1 gap-md-2 p-2 border-bottom bg-light"
     >
       <button
+        type="button"
         @click="editor.chain().focus().toggleBold().run()"
-        :class="{ 'is-active': editor.isActive('bold') }"
-        class="editor-btn"
+        :class="{ active: editor.isActive('bold') }"
+        class="btn btn-sm btn-light"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -63,9 +66,10 @@ export default {
         </svg>
       </button>
       <button
+        type="button"
         @click="editor.chain().focus().toggleItalic().run()"
-        :class="{ 'is-active': editor.isActive('italic') }"
-        class="editor-btn"
+        :class="{ active: editor.isActive('italic') }"
+        class="btn btn-sm btn-light"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -78,9 +82,10 @@ export default {
         </svg>
       </button>
       <button
+        type="button"
         @click="editor.chain().focus().toggleStrike().run()"
-        :class="{ 'is-active': editor.isActive('strike') }"
-        class="editor-btn"
+        :class="{ active: editor.isActive('strike') }"
+        class="btn btn-sm btn-light"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -88,14 +93,15 @@ export default {
           class="icon"
         >
           <path
-            d="M332.2 319.9c17.22 12.17 22.33 26.51 18.61 48.21c-3.031 17.59-10.88 29.34-24.72 36.99c-35.44 19.75-108.5 11.96-186-19.68c-16.34-6.686-35.03 1.156-41.72 17.53s1.188 35.05 17.53 41.71c31.75 12.93 95.69 35.37 157.6 35.37c29.62 0 58.81-5.156 83.72-18.96c30.81-17.09 50.44-45.46 56.72-82.11c3.998-23.27 2.168-42.58-3.488-59.05H332.2zM488 239.9l-176.5-.0309c-15.85-5.613-31.83-10.34-46.7-14.62c-85.47-24.62-110.9-39.05-103.7-81.33c2.5-14.53 10.16-25.96 22.72-34.03c20.47-13.15 64.06-23.84 155.4 .3438c17.09 4.531 34.59-5.654 39.13-22.74c4.531-17.09-5.656-34.59-22.75-39.12c-91.31-24.18-160.7-21.62-206.3 7.654C121.8 73.72 103.6 101.1 98.09 133.1C89.26 184.5 107.9 217.3 137.2 239.9L24 239.9c-13.25 0-24 10.75-24 23.1c0 13.25 10.75 23.1 24 23.1h464c13.25 0 24-10.75 24-23.1C512 250.7 501.3 239.9 488 239.9z"
+            d="M496 224H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h480c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zm-171.1-90.87C315.42 124.63 294.04 120 264.44 120c-35.03 0-59.54 8.78-73.53 26.33-9.52 11.95-12.01 24.69-7.39 37.67H97.64c-.11-.47-.14-.95-.24-1.42-6.57-31.57 6.13-63.53 38.12-85.47C161.47 79.28 206.5 64 270.83 64c48.86 0 91.07 10.14 126.6 30.42 16.71 9.54 29.58 22.04 38.6 37.5h-94.88c-4.48-1.58-10.45-2.79-16.25-2.79zM368.5 352.54c-17.65 17.65-44.8 27.46-81.45 27.46-42.92 0-73.08-11.45-89.65-34.02-3.84-5.23-6.52-11.23-7.97-17.98h-85.87c2.56 26.4 15.65 49.33 39.29 64.97C171.69 411.51 217.15 424 287.05 424c53.94 0 98.71-11.08 134.33-33.25 21.05-13.1 36.31-30.82 45.77-53.15H381.7c-2.3 5.4-6.7 10.9-13.2 14.94z"
           />
         </svg>
       </button>
       <button
+        type="button"
         @click="editor.chain().focus().toggleUnderline().run()"
-        :class="{ 'is-active': editor.isActive('underline') }"
-        class="editor-btn"
+        :class="{ active: editor.isActive('underline') }"
+        class="btn btn-sm btn-light"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -108,9 +114,10 @@ export default {
         </svg>
       </button>
       <button
+        type="button"
         @click="editor.chain().focus().toggleBulletList().run()"
-        :class="{ 'is-active': editor.isActive('bulletList') }"
-        class="editor-btn"
+        :class="{ active: editor.isActive('bulletList') }"
+        class="btn btn-sm btn-light"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -123,9 +130,10 @@ export default {
         </svg>
       </button>
       <button
+        type="button"
         @click="editor.chain().focus().toggleOrderedList().run()"
-        :class="{ 'is-active': editor.isActive('orderedList') }"
-        class="editor-btn"
+        :class="{ active: editor.isActive('orderedList') }"
+        class="btn btn-sm btn-light"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -145,14 +153,8 @@ export default {
 
 <style scoped>
 .icon {
-  @apply w-2 h-2 md:w-4 md:h-4;
-}
-
-.editor-btn {
-  @apply bg-gray-200 p-2 rounded-md text-gray-700 hover:bg-gray-300 duration-300;
-}
-
-.is-active {
-  @apply bg-indigo-500 text-white fill-white;
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
 }
 </style>
