@@ -4,10 +4,8 @@ import type { ShallowRef } from "vue";
 import type { Editor } from "@tiptap/core";
 import { useEditor, EditorContent } from "@tiptap/vue-3";
 import Underline from "@tiptap/extension-underline";
-import { Color } from "@tiptap/extension-color";
 import TextStyle from "@tiptap/extension-text-style";
-import Link from "@tiptap/extension-link";
-import Image from "@tiptap/extension-image";
+import Strike from "@tiptap/extension-strike";
 import StarterKit from "@tiptap/starter-kit";
 import components from "./components";
 import type { Component } from "./components";
@@ -47,7 +45,7 @@ const editor: ShallowRef<Editor | undefined> = useEditor({
     // HTML
     emit("update:modelValue", editor.value.getHTML());
   },
-  extensions: [StarterKit, Underline, TextStyle, Color, Link, Image],
+  extensions: [StarterKit, Underline, TextStyle, Strike],
   editorProps: {
     attributes: {
       class: "w-100 p-2 p-md-3",
