@@ -83,5 +83,3 @@ function toggleHeaderMenu() {
   </div>
 </template>
 
-<style scoped>
-</style>

@@ -11,9 +11,6 @@
   </main>
 </template>
 
-<style scoped>
-</style>
-
 <script setup lang="ts">
 import { ref } from "vue";
 import LightEditor from "@/plugins/LightEditor.vue";

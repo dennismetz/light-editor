@@ -73,5 +73,3 @@ watch(content, (value) => {
     <editor-content :editor="editor" />
   </div>
 </template>
-
-<style scoped></style>

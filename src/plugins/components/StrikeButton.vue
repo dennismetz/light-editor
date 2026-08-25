@@ -19,6 +19,3 @@ defineProps<{
     </svg>
   </button>
 </template>
-
-<style scoped>
-</style>
