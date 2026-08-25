@@ -2,10 +2,8 @@
 import { toRefs, watch } from "vue";
 import { useEditor, EditorContent } from "@tiptap/vue-3";
 import Underline from "@tiptap/extension-underline";
-import { Color } from "@tiptap/extension-color";
 import TextStyle from "@tiptap/extension-text-style";
-import Link from "@tiptap/extension-link";
-import Image from "@tiptap/extension-image";
+import Strike from "@tiptap/extension-strike";
 import StarterKit from "@tiptap/starter-kit";
 
 const props = defineProps<{
@@ -24,7 +22,7 @@ const editor = useEditor({
     // HTML
     emit("update:modelValue", editor.value.getHTML());
   },
-  extensions: [StarterKit, Underline, TextStyle, Color, Link, Image],
+  extensions: [StarterKit, Underline, TextStyle, Strike],
   editorProps: {
     attributes: {
       class: "prose sm:prose-xl md:prose-2xl p-2 md:p-4 focus:outline-none",
@@ -38,38 +36,6 @@ watch(content, (value) => {
   }
 });
 
-function setLink() {
-  const previousUrl = editor.value.getAttributes("link").href;
-  const url = window.prompt("URL", previousUrl);
-
-  // cancelled
-  if (url === null) {
-    return;
-  }
-
-  // empty
-  if (url === "") {
-    editor.value.chain().focus().extendMarkRange("link").unsetLink().run();
-
-    return;
-  }
-
-  // update link
-  editor.value
-    .chain()
-    .focus()
-    .extendMarkRange("link")
-    .setLink({ href: url })
-    .run();
-}
-
-function addImage() {
-  const url = window.prompt("URL");
-
-  if (url) {
-    editor.value.chain().focus().setImage({ src: url }).run();
-  }
-}
 </script>
 <script lang="ts">
 export default {
@@ -171,37 +137,6 @@ export default {
           />
         </svg>
       </button>
-      <button
-        @click="setLink"
-        :class="{ 'is-active': editor.isActive('link') }"
-        class="editor-btn"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 640 512"
-          class="icon"
-        >
-          <path
-            d="M172.5 131.1C228.1 75.51 320.5 75.51 376.1 131.1C426.1 181.1 433.5 260.8 392.4 318.3L391.3 319.9C381 334.2 361 337.6 346.7 327.3C332.3 317 328.9 297 339.2 282.7L340.3 281.1C363.2 249 359.6 205.1 331.7 177.2C300.3 145.8 249.2 145.8 217.7 177.2L105.5 289.5C73.99 320.1 73.99 372 105.5 403.5C133.3 431.4 177.3 435 209.3 412.1L210.9 410.1C225.3 400.7 245.3 404 255.5 418.4C265.8 432.8 262.5 452.8 248.1 463.1L246.5 464.2C188.1 505.3 110.2 498.7 60.21 448.8C3.741 392.3 3.741 300.7 60.21 244.3L172.5 131.1zM467.5 380C411 436.5 319.5 436.5 263 380C213 330 206.5 251.2 247.6 193.7L248.7 192.1C258.1 177.8 278.1 174.4 293.3 184.7C307.7 194.1 311.1 214.1 300.8 229.3L299.7 230.9C276.8 262.1 280.4 306.9 308.3 334.8C339.7 366.2 390.8 366.2 422.3 334.8L534.5 222.5C566 191 566 139.1 534.5 108.5C506.7 80.63 462.7 76.99 430.7 99.9L429.1 101C414.7 111.3 394.7 107.1 384.5 93.58C374.2 79.2 377.5 59.21 391.9 48.94L393.5 47.82C451 6.731 529.8 13.25 579.8 63.24C636.3 119.7 636.3 211.3 579.8 267.7L467.5 380z"
-          />
-        </svg>
-      </button>
-      <button @click="addImage" class="editor-btn">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 512 512"
-          class="icon"
-        >
-          <path
-            d="M447.1 32h-384C28.64 32-.0091 60.65-.0091 96v320c0 35.35 28.65 64 63.1 64h384c35.35 0 64-28.65 64-64V96C511.1 60.65 483.3 32 447.1 32zM111.1 96c26.51 0 48 21.49 48 48S138.5 192 111.1 192s-48-21.49-48-48S85.48 96 111.1 96zM446.1 407.6C443.3 412.8 437.9 416 432 416H82.01c-6.021 0-11.53-3.379-14.26-8.75c-2.73-5.367-2.215-11.81 1.334-16.68l70-96C142.1 290.4 146.9 288 152 288s9.916 2.441 12.93 6.574l32.46 44.51l93.3-139.1C293.7 194.7 298.7 192 304 192s10.35 2.672 13.31 7.125l128 192C448.6 396 448.9 402.3 446.1 407.6z"
-          />
-        </svg>
-      </button>
-      <input
-        type="color"
-        @input="editor.chain().focus().setColor($event.target.value).run()"
-        :value="editor.getAttributes('textStyle').color"
-      />
     </div>
 
     <editor-content :editor="editor" v-bind="$attrs" />

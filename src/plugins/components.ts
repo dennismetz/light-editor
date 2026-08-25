@@ -6,9 +6,6 @@ import StrikeButton from "./components/StrikeButton.vue";
 import BulletListButton from "./components/BulletListButton.vue";
 import OrderedListButton from "./components/OrderedListButton.vue";
 import HeaderMenu from "./components/HeaderMenu.vue";
-import LinkDialog from "./components/LinkDialog.vue";
-import ImageDialog from "./components/ImageDialog.vue";
-import ColorInputVue from "./components/ColorInput.vue";
 
 const components = [
   {
@@ -29,7 +26,7 @@ const components = [
   {
     name: "strike",
     component: StrikeButton,
-    type: "classic",
+    type: "basic",
   },
   {
     name: "bullet-list",
@@ -39,28 +36,13 @@ const components = [
   {
     name: "ordered-list",
     component: OrderedListButton,
-    type: "classic",
+    type: "basic",
   },
   {
     name: "header-menu",
     component: HeaderMenu,
     type: "basic",
-  },
-  {
-    name: "link-dialog",
-    component: LinkDialog,
-    type: "classic",
-  },
-  {
-    name: "image-dialog",
-    component: ImageDialog,
-    type: "classic",
-  },
-  {
-    name: "color-input",
-    component: ColorInputVue,
-    type: "classic",
-  },
+  }
 ];
 
 export interface Component {
