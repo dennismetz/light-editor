@@ -77,4 +77,11 @@ watch(content, (value) => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.editor-container {
+  @apply flex flex-col border dark:border-slate-500 rounded-md overflow-hidden;
+}
+.editor-toolbox {
+  @apply flex flex-wrap items-center space-x-2 md:space-x-4 p-2 border-b bg-gray-300 dark:bg-slate-500 dark:border-slate-500;
+}
+</style>

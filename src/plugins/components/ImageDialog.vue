@@ -70,4 +70,35 @@ function addImage() {
 </template>
 
 <style scoped>
+.icon {
+  @apply w-2 h-2 md:w-4 md:h-4;
+}
+
+.editor-btn {
+  @apply p-2 rounded-md text-gray-700 hover:bg-white dark:hover:bg-gray-300 duration-300;
+}
+
+.form-group {
+  @apply flex flex-col;
+}
+
+.form-control {
+  @apply border border-gray-300 rounded-md;
+}
+
+.btn {
+  @apply p-2 md:p-4 rounded-md;
+}
+
+.btn-warning {
+  @apply bg-yellow-500 text-white;
+}
+
+.btn-info {
+  @apply bg-blue-500 text-white;
+}
+
+.btn-success {
+  @apply bg-green-500 text-white;
+}
 </style>

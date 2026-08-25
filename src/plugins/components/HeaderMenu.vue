@@ -69,4 +69,23 @@ function toggleHeaderMenu() {
 </template>
 
 <style scoped>
+.icon {
+  @apply w-2 h-2 md:w-4 md:h-4;
+}
+
+.header-div {
+  @apply relative flex flex-col justify-center items-center;
+}
+
+.parent-header {
+  @apply absolute top-8 left-0 z-10 flex space-x-1 md:space-x-2;
+}
+
+.list-header {
+  @apply bg-white px-2 py-1 text-sm text-gray-600 border rounded-sm hover:bg-gray-100 hover:text-gray-900 cursor-pointer;
+}
+
+.is-h-active {
+  @apply bg-gray-700 text-white;
+}
 </style>
