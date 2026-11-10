@@ -12,7 +12,7 @@
     },
     "./dist/light-editor.css": "./dist/light-editor.css"
   },
-  "version": "1.0.3",
+  "version": "1.1.0",
   "license": "MIT",
   "scripts": {
     "dev": "vite dev --port 3333",
