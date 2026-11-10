@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { toRefs, watch, computed } from "vue";
 import type { ShallowRef } from "vue";
-import type { Editor } from "@tiptap/core";
 import { useEditor, EditorContent } from "@tiptap/vue-3";
-import Underline from "@tiptap/extension-underline";
-import TextStyle from "@tiptap/extension-text-style";
-import Strike from "@tiptap/extension-strike";
+import type { Editor } from "@tiptap/vue-3";
+import { TextStyle } from "@tiptap/extension-text-style";
 import StarterKit from "@tiptap/starter-kit";
 import components from "./components";
 import type { Component } from "./components";
@@ -43,9 +41,11 @@ const editor: ShallowRef<Editor | undefined> = useEditor({
   content: content.value,
   onUpdate: () => {
     // HTML
-    emit("update:modelValue", editor.value.getHTML());
+    emit("update:modelValue", editor.value?.getHTML() ?? "");
   },
-  extensions: [StarterKit, Underline, TextStyle, Strike],
+  // StarterKit enthält seit Tiptap 3 auch Underline und Strike. Link und TrailingNode sind neu und bleiben aus,
+  // damit das erzeugte HTML wie bisher bleibt (keine Links, kein automatisch angehängter leerer Absatz).
+  extensions: [StarterKit.configure({ link: false, trailingNode: false }), TextStyle],
   editorProps: {
     attributes: {
       class: "w-100 p-2 p-md-3",
@@ -55,7 +55,8 @@ const editor: ShallowRef<Editor | undefined> = useEditor({
 
 watch(content, (value) => {
   if (value !== editor.value?.getHTML()) {
-    editor.value?.commands.setContent(value);
+    // Seit Tiptap 3 löst setContent standardmäßig ein Update aus; Änderungen von außen sollen nicht zurückgemeldet werden
+    editor.value?.commands.setContent(value, { emitUpdate: false });
   }
 });
 </script>
